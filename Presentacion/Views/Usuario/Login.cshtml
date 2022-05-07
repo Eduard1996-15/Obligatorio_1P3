@@ -1,0 +1,79 @@
+﻿@using Microsoft.AspNetCore.Http;
+<div class="login">
+    <h1>Logueo</h1>
+    <form method="post">
+        <input type="text" name="e" id="txtEmail" placeholder="email" required="required" />
+        <input type="password" name="p" id="txtPassword" placeholder="Password" required="required" />
+        <button type="submit" class="btn btn-primary btn-block btn-large" id="btnEntrar">Entrar</button>
+        <p id="res"></p>
+    </form>
+    <h3>@ViewBag.mje</h3>
+</div>
+
+@section scripts{
+<script>
+    document.querySelector("#btnEntrar").addEventListener("Click", verificarLogueo);
+
+    function verificarLogueo(event) {
+        event.preventDefault();
+        let res = "";
+        let contrasenia = document.querySelector("#txtPassword").value;
+        let email = document.querySelector("#txtEmail").value;
+
+
+        if (validarEmail(email)) {
+            if (validar_clave(contrasenia)) {
+                this.submit();
+            }
+            else {
+                res = "Contraseña inválida"
+            }
+        } else {
+            res = "Email inválido"
+        }
+        document.querySelector("#res").innerHTML = res;
+    }
+
+    function validar_clave(contrasenia) {
+        if (contrasenia.length >= 6)//largo de la clave minimo 6
+        {
+            let mayuscula = false;
+            let minuscula = false;
+            let numero = false;
+
+            for (let i = 0; i < contrasenia.length; i++)//recorro la misma
+            {
+                if (contrasenia.charCodeAt(i) >= 65 && contrasenia.charCodeAt(i) <= 90) {
+                    mayuscula = true;//uso los charcode para saber si tiene mayusculas
+                }
+                else if (contrasenia.charCodeAt(i) >= 97 && contrasenia.charCodeAt(i) <= 122) {
+                    minuscula = true;//uso los charcode para saber si tiene minusculas
+                }
+                else if (contrasenia.charCodeAt(i) >= 48 && contrasenia.charCodeAt(i) <= 57) {
+                    numero = true;////uso los charcode para saber si tiene numeros
+                }
+            }
+            if (mayuscula && minuscula && numero)//si tiene todo
+            {
+                return true;//es verdadero
+            } else {
+
+                if (!mayuscula) {//si da false mandar alert
+                    alert("Falta una letra mayúscula")
+                }
+                if (!minuscula) {
+                    alert("Falta una letra minuscula")
+                }
+                if (!numero) {
+                    alert("Falta un número")
+                }
+            }
+        } else {//mensaje
+            alert("La contraseña debe ser superior a 6 caracteres ")
+            return false;//si no falso
+        }
+    }
+
+</script>
+    <script src="~/js/site.js"></script>
+}

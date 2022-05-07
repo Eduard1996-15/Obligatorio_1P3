@@ -1,0 +1,136 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model Dominio.EntidadesNegocios.Planta
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>Planta</h4>
+<h4>@ViewBag.mje</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NombreVulgar"   class="control-label"></label>
+                <input required asp-for="NombreVulgar" id="nomV" class="form-control" />
+                <span asp-validation-for="NombreVulgar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreCientifico" class="control-label"></label>
+                <input required asp-for="NombreCientifico" id="nombreC" class="form-control" />
+                <span asp-validation-for="NombreCientifico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input required asp-for="Descripcion" id="descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Altura" class="control-label"></label>
+                <input required asp-for="Altura" id="altura" class="form-control" />
+                <span asp-validation-for="Altura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ambiente" class="control-label"></label>
+                <select required asp-for="Ambiente" id="ambiente" class="control-label">
+                    <option value="Interior">Interior</option>
+                    <option value="Exterior">Exterior</option>
+                    <option value="Mixta">Mixta</option>
+                </select>
+                <span asp-validation-for="Ambiente" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label asp-for="ContinenteOrigen" class="control-label"></label>
+                <select required asp-for="ContinenteOrigen" id="continenteorigen" class="control-label">
+                    <option value="SI">Si</option>
+                    <option value="No">No</option>
+                </select>
+                <span asp-validation-for="ContinenteOrigen" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="imagen" class="control-label"></label>
+                <input required type="file" id="imagen" name="imagen" class="form-control" />
+                <span asp-validation-for="Foto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo" class="control-label"></label>
+                <select required asp-for="Tipo" name="tipo" id="tipo" class="control-label">
+                    @if (ViewBag.tipos != null)
+                    {
+                        @foreach (var item in ViewBag.tipos)
+                        {
+                            <option value="@item.Id">@item.Nombre</option>
+                        }
+                    }
+
+                </select>
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+            <hr />
+            <h3>Ficha de planta </h3>
+            <div class="form-group">
+                <label asp-for="FichaPlanta.FrecuenciaRiego" class="control-label"></label>
+                <input required id="frecuenciriego" asp-for="FichaPlanta.FrecuenciaRiego" class="form-control" />
+                <span asp-validation-for="FichaPlanta.FrecuenciaRiego" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FichaPlanta.TipoIluminacion" class="control-label"></label>
+                <select id="iluminacion" asp-for="FichaPlanta.TipoIluminacion" required class="control-label">
+                    <option value="SolarDirecta">SolarDirecta</option>
+                    <option value="SolarIndirecta">SolarIndirecta</option>
+                    <option value="Sombra">Sombra</option>
+                </select>
+                <span asp-validation-for="FichaPlanta.TipoIluminacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FichaPlanta.Temperatura" class="control-label"></label>
+                <input id="temperatura"  asp-for="FichaPlanta.Temperatura" required class="form-control" />
+                <span asp-validation-for="FichaPlanta.Temperatura"  class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" id="create" value="Create" class="btn btn-primary" />
+            </div>
+            <p id="res"></p>
+        </form>
+    </div>
+</div>
+            
+
+
+@section Scripts {
+    <script>
+       
+
+        document.querySelector("#create").addEventListener("Click",Validar);
+
+        function validar() {
+            let nomV = document.querySelector("#nomV").value;
+            let nombreC = document.querySelector("#nombreC").value;
+            let descripcion = document.querySelector("#descripcion").value;
+            let altura = document.querySelector("#altura").value;
+            let ambiente = document.querySelector("#ambiente").value;
+            let continenteorigen = document.querySelector("#continenteorigen").value;
+            let imagen = document.querySelector("#imagen").value;
+            let tipo = document.querySelector("#tipo").value;
+            let frecuenciriego = document.querySelector("#frecuenciriego").value;
+            let iluminacion = document.querySelector("#iluminacion").value;
+            let temperatura = document.querySelector("#temperatura").value;
+            let res = "";
+            if (nomV === "" || nombreC === "" && ambiente === "" || continenteorigen === "" ||
+                imagen === "" || frecuenciriego === "" || iluminacion === "" || temperatura == null)
+            { res += "debe agregar datos validos <br>"; }
+            else if (descripcion === "" || descripcion.length() < 10 && descripcion.length() > 500)
+            { res += "descripcion debe tener entre 10 y 500 caracteres <br>"; }
+            else if (tipo < 1 || altura < 0)
+            { res += "altura y tipo no pueden ser negativos <br>"; }
+            else {
+                res = "";
+                this.submit();}
+               
+            document.querySelector("#res").innerHTML = res;
+        }
+    </script>
+}

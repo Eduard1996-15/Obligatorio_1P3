@@ -1,0 +1,48 @@
+﻿
+<h1>Buscar Tipo</h1>
+<hr>
+<form  method="post">
+    <label for="nombretipo">Nombre : </label>
+    <input  required type="text" name="nombretipo" value="" />
+    <input type="submit" name="Buscar" class="btn-dark" value="Buscar" />
+    <hr>
+    <h2>@ViewBag.mje</h2>   
+    @if (ViewBag.tp != null)
+    {
+
+        <table class="table"  border="1">           
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Descripcion
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @ViewBag.tp.Id
+                    </td>
+                    <td>
+                        @ViewBag.tp.Nombre
+                    </td>
+                    <td>
+                        @ViewBag.tp.Descripcion
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar ", "Edit", new { id = @ViewBag.tp.Id })
+                        @Html.ActionLink(" Eliminar", "Delete", new { id = @ViewBag.tp.Id })
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+       
+    }
+</form>

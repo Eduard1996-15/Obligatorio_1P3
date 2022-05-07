@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Dominio.EntidadesNegocios.TipoPlanta>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>@ViewBag.mje</h2>
+
+<table class="table" border="1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>       
+        </tr>
+}
+    </tbody>
+</table>

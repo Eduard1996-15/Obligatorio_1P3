@@ -1,0 +1,40 @@
+﻿@model Dominio.EntidadesNegocios.Ficha
+
+@{
+    ViewData["Title"] = "VerFicha";
+}
+
+<h1>VerFicha</h1>
+<div class="btn btn-outline-primary">
+    <a asp-action="Index">Back to List</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FrecuenciaRiego)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoIluminacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Temperatura)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.FrecuenciaRiego)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.TipoIluminacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Temperatura)
+            </td>
+        </tr>
+    </tbody>
+</table>

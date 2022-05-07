@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Dominio.EntidadesNegocios.Planta>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<h2>@ViewBag.mje</h2>
+@if (Model != null)
+{<table class="table"  border="1">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tipo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NombreCientifico)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NombreVulgar)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ambiente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Altura)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Foto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContinenteOrigen)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @item.Tipo.Nombre
+                </td>
+                <td>
+                    @item.NombreCientifico
+                </td>
+                <td>
+                    @item.NombreVulgar
+                </td>
+                <td>
+                    @item.Descripcion
+                </td>
+                <td>
+                    @item.Ambiente
+                </td>
+                <td>
+                    @item.Altura
+                </td>
+                <td class="col-sm-10">
+                    <img class="img-thumbnail" src="~/imagenes/fotos/@item.Foto" />
+                </td>
+                <td>
+                    @item.ContinenteOrigen
+                </td>
+                <td class="btn btn-outline-primary">
+                  @Html.ActionLink("VER FICHA", "VerFicha", new {
+                   f = @item.FichaPlanta.FrecuenciaRiego, 
+                   t= @item.FichaPlanta.TipoIluminacion,
+                   ta= @item.FichaPlanta.Temperatura
+                })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}

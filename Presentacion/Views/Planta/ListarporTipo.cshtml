@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Dominio.EntidadesNegocios.Planta>
+
+@{
+    ViewData["Title"] = "ListarporTipo";
+}
+<h2>@ViewBag.Msj</h2>
+@if (ViewBag.tp != null)
+{<form method="post">
+        <select required name="n">
+            @foreach (var item in ViewBag.tp)
+            {
+                <option value="@item.Nombre">@item.Nombre</option>
+            }
+        </select>
+        <br />
+        <input type="submit" name="Buscar" value="Buscar" />
+    </form>
+}
+
+
+@if (Model != null)
+{
+    <h1>ListarporTipo</h1>
+
+    <table class="table"  border="1">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NombreVulgar)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NombreCientifico)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Altura)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ambiente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContinenteOrigen)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Foto)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreVulgar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreCientifico)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Altura)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ambiente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContinenteOrigen)
+                </td>
+                <td>
+                    <div class="col-sm-10">
+                        <img class="img-thumbnail" src="~/imagenes/fotos/@item.Foto" />
+                    </div>
+                </td>
+                <td class="btn btn-outline-primary">
+                    @Html.ActionLink("VER FICHA", "VerFicha", new
+                    {
+                        f = @item.FichaPlanta.FrecuenciaRiego,
+                        t =  @item.FichaPlanta.TipoIluminacion,
+                        ta = @item.FichaPlanta.Temperatura
+                    })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+}

@@ -1,0 +1,61 @@
+﻿@model Dominio.EntidadesNegocios.Planta
+
+@{
+    ViewData["Title"] = "Visualizar";
+}
+
+<h1>Visualizar</h1>
+
+<h4>Planta</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Visualizar" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NombreCientifico" class="control-label"></label>
+                <input asp-for="NombreCientifico" readonly class="form-control" />
+                <span asp-validation-for="NombreCientifico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreVulgar" class="control-label"></label>
+                <input asp-for="NombreVulgar" readonly class="form-control" />
+                <span asp-validation-for="NombreVulgar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" readonly class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ambiente" class="control-label"></label>
+                <input asp-for="Ambiente" readonly class="form-control" />
+                <span asp-validation-for="Ambiente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Altura" class="control-label"></label>
+                <input asp-for="Altura" readonly class="form-control" />
+                <span asp-validation-for="Altura" class="text-danger"></span>
+            </div>
+            <div class="col-sm-10" >
+                <label asp-for="Foto" class="control-label"></label>
+                <img class="img-thumbnail" src="~/imagenes/fotos/@Model.Foto" />
+                <span asp-validation-for="Foto" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" readonly asp-for="ContinenteOrigen" /> @Html.DisplayNameFor(model => model.ContinenteOrigen)
+                </label>
+            </div>
+           
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

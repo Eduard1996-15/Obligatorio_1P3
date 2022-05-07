@@ -1,0 +1,30 @@
+﻿<h1>    Editar </h1>
+<h2>@ViewBag.mje</h2>
+
+<form method="post">
+    <label for="descripcion">Descripcion :</label>
+    <input type="text"  id="descripcion" name="descripcion" value="@ViewBag.des" />
+    <input type="submit" id="Editar" class="btn-danger" value="Editar">
+    
+</form>
+<p id="res"></p>
+@section Scripts {
+    <script>
+
+        document.querySelector("#Editar").addEventListener("Click", Validar);
+
+        function validar() {
+            let res = "";
+            let des = document.querySelector("#descripcion").value;
+            if (des.Length < 10) {
+                res = "descripcion debe ser de minimo 10 caracteres";
+            }
+          else {
+                res = "";
+                this.submit();
+            }
+
+            document.querySelector("#res").innerHTML = res;
+        }
+    </script>
+}
